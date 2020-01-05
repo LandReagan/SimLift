@@ -1,0 +1,69 @@
+#:kivy 1.11.0
+
+<ButtonUp>:
+
+
+<ButtonDown>:
+
+
+
+<MaintenancePanel>:
+    canvas:
+        Color:
+            rgba: .3, 0, 0, 1
+        Rectangle:
+            pos: self.pos
+    FloatLayout:
+        ButtonUp:
+            text: 'HAUT'
+            pos: root.x, root.y + 100
+            on_press: root.change_floor(1)
+
+        ButtonDown:
+            text: 'BAS'
+            pos: root.pos
+            on_press: root.change_floor(-1)
+
+<Car>:
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: 100, 100
+
+<Room>:
+    car: car
+    canvas:
+        Color:
+            rgba: 0, 1, 0, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: 100, 400
+    FloatLayout:
+        Car:
+            id: car
+            pos: root.pos
+
+<SimLiftHome>:
+
+    room: room
+    maintenance_panel: maintenance_panel
+
+    canvas:
+        Color:
+            rgba: .3, .3, .3, 1
+        Rectangle:
+            pos: root.pos
+            size: root.size
+
+    FloatLayout:
+        Room:
+            id: room
+            pos: 100, 100
+
+        MaintenancePanel:
+            id: maintenance_panel
+            pos: 300, 300
+
+
