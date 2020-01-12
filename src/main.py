@@ -1,54 +1,25 @@
 from kivy.app import App
-from kivy.uix.widget import Widget
-from kivy.uix.button import Button
-from kivy.uix.floatlayout import FloatLayout
-from kivy.properties import ObjectProperty, NumericProperty
-from kivy.animation import Animation
+from kivy.uix.boxlayout import BoxLayout
+from kivy.properties import ObjectProperty
 from kivy.lang.builder import Builder
 
 Builder.load_file('SimLiftHome.kv')
 
 
-class ButtonUp(Button):
-    pass
+class SimLiftHome(BoxLayout):
 
-
-class ButtonDown(Button):
-    pass
-
-
-class MaintenancePanel(FloatLayout):
-
-    parent = ObjectProperty(None)
-
-    def change_floor(self, delta_floor):
-        self.parent.change_floor(delta_floor)
-
-
-class Car(Widget):
-    pass
-
-
-class Room(Widget):
-    car = ObjectProperty(None)
-    max_floor = 3
-
-
-class SimLiftHome(Widget):
     room = ObjectProperty(None)
-    maintenance_panel = ObjectProperty(None)
-    car_floor = NumericProperty(0)
+    room_controller = ObjectProperty(None)
 
     def prepare(self):
-        self.maintenance_panel.parent = self
+        self.room.attach_controller(self.room_controller)
+        self.room_controller.attach_room(self.room)
 
-    def change_floor(self, delta_floor):
-        if 0 <= self.car_floor + delta_floor <= self.room.max_floor:
-            self.car_floor += delta_floor
+    def start(self):
+        self.room_controller.run()
 
-    def on_car_floor(self, *args):
-        animation = Animation(duration=0.5, pos=(100, 100 + 100 * self.car_floor))
-        animation.start(self.room.car)
+    def stop(self):
+        self.room_controller.stop()
 
 
 class SimLift(App):

@@ -1,0 +1,16 @@
+<RoomController>:
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        ToggleButton:
+            text: 'CONTROLLER'
+            on_press: root.run() if self.state == 'down' else root.stop()
+
+        ToggleButton:
+            text: 'Motor UP'
+            on_press: root.set_motor_up()
+
+        ToggleButton:
+            text: 'Motor DOWN'
+            on_press: root.set_motor_down()

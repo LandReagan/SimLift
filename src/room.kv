@@ -1,0 +1,16 @@
+<Room>:
+    canvas:
+        # Room background
+        Color:
+            rgba: .1, .1, .1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.room_width, self.floor_number * self.floor_height
+
+        # Car
+        Color:
+            rgba: 0, .6, 0, 1
+        RoundedRectangle:
+            pos: self.x, self.car_pos_y
+            size: self.car_width, self.car_width
+
