@@ -5,6 +5,7 @@ A room crosses defined floors
 
 """
 from graphics_constants import FLOOR_HEIGHT, ROOM_WIDTH, CAR_WIDTH, CAR_ANIMATION_PIXELS_PER_STEP
+from lift_system_constants import FLOOR_NUMBER
 
 from kivy.uix.widget import Widget
 from kivy.graphics import Line, Color
@@ -22,7 +23,7 @@ class Room(Widget):
 
     room_width = NumericProperty(ROOM_WIDTH)
 
-    floor_number = NumericProperty(4)
+    floor_number = NumericProperty(FLOOR_NUMBER)
     floor_height = NumericProperty(FLOOR_HEIGHT)
 
     controller = ObjectProperty(None)

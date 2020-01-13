@@ -19,6 +19,8 @@ class Motor(Enum):
 class RoomController(BoxLayout):
 
     room = ObjectProperty(None)
+    button_motor_up = ObjectProperty(None)
+    button_motor_down = ObjectProperty(None)
 
     def __init__(self, **kwargs):
         BoxLayout.__init__(self, **kwargs)
@@ -35,11 +37,13 @@ class RoomController(BoxLayout):
         print('Room controller stops!')
         Clock.unschedule(self._control)
 
-    def set_motor_up(self):
-        self.motor = Motor.UP
-
-    def set_motor_down(self):
-        self.motor = Motor.DOWN
+    def set_motor(self):
+        if self.button_motor_up.state == 'down' and self.button_motor_down.state == 'normal':
+            self.motor = Motor.UP
+        elif self.button_motor_up.state == 'normal' and self.button_motor_down.state == 'down':
+            self.motor = Motor.DOWN
+        else:
+            self.motor = Motor.STOP
 
     def _control(self, dt):
         if not self.room:
