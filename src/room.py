@@ -33,7 +33,7 @@ class Room(Widget):
         with self.canvas.after:
             Color(1, 1, 1, 1, mode='rgba')
             for y in range(self.floor_number + 1):
-                Line(points=[0, y * self.floor_height, 100, y * self.floor_height], dash_length=5, dash_offset=5)
+                Line(points=[0, y * self.floor_height, self.room_width, y * self.floor_height], dash_length=5, dash_offset=5)
 
     def attach_controller(self, controller):
         self.controller = controller

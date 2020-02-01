@@ -30,10 +30,18 @@ class RoomController(BoxLayout):
         self.room = room
 
     def run(self):
+        """
+        Starts the control loop of the room controller
+        :return: Nothing
+        """
         print('Room controller starts!')
         Clock.schedule_interval(self._control, 1.0/CAR_ANIMATION_FPS)
 
     def stop(self):
+        """
+        Stops the control loop of the room controller
+        :return:
+        """
         print('Room controller stops!')
         Clock.unschedule(self._control)
 
@@ -46,6 +54,14 @@ class RoomController(BoxLayout):
             self.motor = Motor.STOP
 
     def _control(self, dt):
+        """
+        Control loop of the room controller. It (in turn):
+        - Update sensors state,
+        - Trigger the controller program,
+        - Moves the Car one time step depending on Motor state.
+        :param dt: delta time since last call, as it is triggered by the Kivy Clock
+        :return: Nothing
+        """
         if not self.room:
             return
         if self.motor == Motor.UP:
